@@ -1,11 +1,11 @@
 [web]
-webserver      ansible_ssh_host=localhost             ip=192.172.100.101  
+webserver      ansible_ssh_host=localhost        ip=192.172.100.101  
 
 [application]
-applserver   ansible_ssh_host=appl.virtualbox.io         ip=192.172.100.101  
+applserver   ansible_ssh_host=localhost         ip=192.172.100.101  
 
 [database]
-dbserver     ansible_ssh_host=db.virtualbox.io           ip=192.172.100.102    dedicated=proxy,nfs
+dbserver     ansible_ssh_host=localhost         ip=192.172.100.101   
 			       
 
 [web:vars]
@@ -14,3 +14,18 @@ ansible_user=applmgr
 ansible_password=mypassword
 ansible_become_password=mypassword
 ansible_port=2022
+
+[application:vars]
+ansible_connection=ssh
+ansible_user=applmgr 
+ansible_password=mypassword
+ansible_become_password=mypassword
+ansible_port=2024
+
+
+[database:vars]
+ansible_connection=ssh
+ansible_user=applmgr 
+ansible_password=mypassword
+ansible_become_password=mypassword
+ansible_port=2026
