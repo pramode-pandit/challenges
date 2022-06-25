@@ -1,0 +1,35 @@
+- hosts: "web"
+  become: true
+  vars_files:
+    - vars/default.yaml
+  tasks:
+  - name: install apache2 latest
+    apt: name=apache2 update_cache=yes state=latest
+    when: _version is not defined
+
+  - name: "install apache version {{ _version }}"
+    apt: name="apache2={{ _version }}-*" state=present update_cache=yes
+    when: _version is defined
+
+  - name: Copy over the conf to apache
+    copy:
+      src: files/apache2.conf
+      dest: "/etc/apache2/apache2.conf"
+      owner: root
+      group: root
+      mode: 0600
+    notify: restart-apache
+
+  - name: Check PID of existing apache process
+    shell: "ps -ef | grep apache2"
+    register: apache2_status
+
+  - debug: "msg={{ apache2_status.stdout }}"
+
+
+  handlers:
+  - name: restart-apache
+    service:
+      name: apache2
+      state: restarted
+
