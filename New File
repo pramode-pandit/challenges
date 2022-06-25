@@ -1,0 +1,20 @@
+object='{"x":{"y":{"z":"a"}},"p":"b"}'
+
+
+echo "$object" | jq '. | keys[]'
+"p"
+"x"
+
+
+
+for i in $(echo "$object" | jq '. | keys[]'); do
+
+echo evaluating key $i
+
+key=$(echo "$object" | jq  ."${i}")
+
+echo $key
+
+echo "[${key}]" | jq -r 'map(type)'
+
+done

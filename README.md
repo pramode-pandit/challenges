@@ -26,6 +26,8 @@ Run playbook to set up 3 tier architecture
 
 ```
 ansible-playbook playbooks/webserver/apache2.yaml
+
+WIP
 ansible-playbook playbooks/applserver/tomacat.yaml
 ansible-playbook playbooks/database/mysql.yaml
 ```
@@ -34,6 +36,9 @@ ansible-playbook playbooks/database/mysql.yaml
 
 We need to write code that will query the meta data of an instance within AWS and provide a
 json formatted output.
+
+**Solution**
+WIP
 
 ### Challenge 03
 
