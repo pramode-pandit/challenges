@@ -3,11 +3,17 @@
 
 We have a nested object, we would like a function that you pass in the object and a key and get
 back the value. How this is implemented is up to you.
+
 Example Inputs
+
 object = {“a”:{“b”:{“c”:”d”}}}
+
 key = a/b/c
+
 object = {“x”:{“y”:{“z”:”a”}}}
+
 key = x/y/z
+
 value = a
 
 ##### Solution
@@ -16,11 +22,16 @@ json_search_func -> file contains the function to retreive given key from json o
 
 **testing**
 
+Switch to the script directory and source the script file
+
 ```
 cd challenge03/
-
 source json_search_func
+```
 
+test outcome
+
+```
 root@MSI# object='{"x":{"y":{"z":"a"}},"p":"b","c":"ui"}'
 root@MSI# key='"y"'
 root@MSI#
