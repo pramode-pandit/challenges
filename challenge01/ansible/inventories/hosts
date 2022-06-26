@@ -1,12 +1,18 @@
 [web]
-webserver      ansible_ssh_host=localhost        ip=192.172.100.101  
+webserver    ansible_ssh_host=localhost        ip=192.172.100.101  
 
 [application]
 applserver   ansible_ssh_host=localhost         ip=192.172.100.101  
 
 [database]
 dbserver     ansible_ssh_host=localhost         ip=192.172.100.101   
-			       
+	
+	
+
+# In actual application `ansible_password` and `ansible_become_password` will either be stored in 
+ansible vault or will be provided during the script execution with --ask-pass.
+
+
 
 [web:vars]
 ansible_connection=ssh
@@ -14,6 +20,7 @@ ansible_user=applmgr
 ansible_password=mypassword
 ansible_become_password=mypassword
 ansible_port=2022
+
 
 [application:vars]
 ansible_connection=ssh
