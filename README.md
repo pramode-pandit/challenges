@@ -35,7 +35,7 @@ ansible
 │           └── webserver.yaml
 ```
 
-Files with the name **cred.yaml** contain passwords and hence encrypted with ansible vault
+Files with the name **cred.yaml** contain passwords and hence encrypted with `ansible vault`
 
 **Assumptions**
 
@@ -56,6 +56,8 @@ cd challenge01/ansible
 
 export ANSIBLE_CONFIG=$(pwd)/ansible.cfg
 ansible all -m ping 
+
+ansible-vault encrypt ansible/playbooks/database/vars/cred.yaml
 ```
 
 **Run playbook to set up 3 tier architecture**
