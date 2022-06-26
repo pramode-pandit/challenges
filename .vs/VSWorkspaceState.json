@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\challenge01\\ansible",
+    "\\challenge01\\ansible\\inventories",
+    "\\challenge01\\ansible\\playbooks",
+    "\\challenge01\\ansible\\playbooks\\webserver"
+  ],
+  "SelectedNode": "\\challenge01",
+  "PreviewInSolutionExplorer": false
+}

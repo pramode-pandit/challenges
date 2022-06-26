@@ -1,0 +1,57 @@
+---
+- hosts: applserver
+  become: true
+  tasks:
+    - name: Update the System Packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+  
+    - name: Install JAVA
+      apt:
+        name: openjdk-8-jdk
+        state: present
+
+    - name: Create a tomcat10 Directory
+      file:
+        path: /opt/tomcat10
+        owner: applmgr
+        group: applmgr
+        mode: 755
+        recurse: yes
+
+    - name: Copy tomcat10 binary  to tmp
+      copy:
+        src: binaries/apache-tomcat-10.0.22.tar.gz
+        dest: /tmp/
+        mode: 0755
+  
+    # In real project it should download it directly from internal repository.
+    - name: download and unarchive tomcat10 
+      unarchive:
+        # src: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.22/bin/apache-tomcat-10.0.22.tar.gz
+        src: /tmp/apache-tomcat-10.0.22.tar.gz
+        dest: /opt/tomcat10
+        remote_src: yes
+        extra_opts: [--strip-components=1]
+  
+    - name: Change ownership of tomcat directory
+      file:
+        path: /opt/tomcat10
+        owner: applmgr
+        group: applmgr
+        mode: 0755
+        recurse: yes
+        state: directory
+  
+    - name: Copy Tomcat service to remote
+      copy:
+        src: files/tomcat.service
+        dest: /etc/systemd/system/
+        mode: 0755
+  
+    - name: Start and Enable Tomcat10
+      systemd:
+        name: tomcat
+        state: started
+        daemon_reload: true
